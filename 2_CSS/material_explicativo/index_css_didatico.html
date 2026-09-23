@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS — Guia Prático e Didático</title>
+
+    <!--
+    ============================================================
+    COMO O CSS FUNCIONA
+    ============================================================
+
+    HTML = estrutura/conteúdo.
+    CSS  = apresentação/layout/comportamento visual.
+
+    Anatomia:
+        seletor {
+            propriedade: valor;
+        }
+
+    Exemplo:
+        p {
+            color: blue;
+        }
+
+    FORMAS DE APLICAR CSS
+
+    1. Inline:
+        <p style="color: red;">Texto</p>
+
+    2. Internal:
+        <style>
+            p { color: red; }
+        </style>
+
+    3. External:
+        <link rel="stylesheet" href="style.css">
+
+    Neste material usamos principalmente CSS externo.
+    -->
+
+    <style>
+        /* Internal CSS: mantido apenas para demonstrar a diferença. */
+        .internal-demo {
+            border-left: 5px solid #7c3aed;
+            padding: 15px;
+            background: #f3e8ff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="style_css_didatico.css">
+</head>
+
+<body id="topo">
+
+<header class="topo">
+    <div class="container">
+        <p class="eyebrow">GUIA PRÁTICO DE CSS</p>
+        <h1>CSS do básico ao layout</h1>
+        <p class="hero-text">
+            Um único HTML + um único CSS para aprender experimentando.
+            Altere uma propriedade, salve e observe o navegador.
+        </p>
+
+        <nav class="menu">
+            <a href="#fundamentos">Fundamentos</a>
+            <a href="#seletores">Seletores</a>
+            <a href="#cores">Cores</a>
+            <a href="#background">Background</a>
+            <a href="#box-model">Box Model</a>
+            <a href="#unidades">Unidades</a>
+            <a href="#texto">Texto</a>
+            <a href="#display">Display</a>
+            <a href="#flexbox">Flexbox</a>
+            <a href="#grid">Grid</a>
+            <a href="#position">Position</a>
+            <a href="#z-index">Z-index</a>
+            <a href="#pseudo">Pseudo-classes</a>
+            <a href="#responsividade">Responsividade</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- =========================================================
+         1. FUNDAMENTOS
+         ========================================================= -->
+    <section class="section" id="fundamentos">
+        <span class="section-number">01</span>
+        <h2>Fundamentos: como ler CSS</h2>
+
+        <div class="explain">
+            <strong>CSS = Cascading Style Sheets.</strong>
+            <p>
+                O CSS é uma linguagem de estilos. Ele diz ao navegador
+                <strong>como os elementos HTML devem aparecer e se organizar</strong>.
+            </p>
+        </div>
+
+        <div class="syntax-demo">
+            <div class="syntax-line">
+                <span class="token-selector">.card</span>
+                <span>{</span>
+            </div>
+            <div class="syntax-line indent">
+                <span class="token-property">color</span><span>:</span>
+                <span class="token-value">blue</span><span>;</span>
+            </div>
+            <div class="syntax-line">
+                <span>}</span>
+            </div>
+        </div>
+
+        <div class="concept-grid">
+            <article class="concept-card">
+                <h3>Seletor</h3>
+                <p>Indica <strong>quem</strong> receberá o estilo.</p>
+                <code>.card</code>
+            </article>
+            <article class="concept-card">
+                <h3>Propriedade</h3>
+                <p>Indica <strong>o que</strong> queremos alterar.</p>
+                <code>color</code>
+            </article>
+            <article class="concept-card">
+                <h3>Valor</h3>
+                <p>Indica <strong>como</strong> a propriedade será aplicada.</p>
+                <code>blue</code>
+            </article>
+            <article class="concept-card">
+                <h3>Declaração</h3>
+                <p>É o conjunto propriedade + valor.</p>
+                <code>color: blue;</code>
+            </article>
+        </div>
+
+        <div class="tip">
+            <strong>Como estudar:</strong>
+            leia o comentário do CSS → altere um valor → salve → observe →
+            tente prever o próximo resultado.
+        </div>
+
+        <h3>Três formas de aplicar CSS</h3>
+
+        <div class="three-columns">
+            <article class="card">
+                <h4>Inline</h4>
+                <p>Fica diretamente no elemento HTML.</p>
+                <pre><code>&lt;p style="color:red"&gt;</code></pre>
+                <small>Útil para demonstração, mas geralmente não é a melhor organização.</small>
+            </article>
+
+            <article class="card">
+                <h4>Internal</h4>
+                <p>Fica dentro de <code>&lt;style&gt;</code> no HTML.</p>
+                <pre><code>&lt;style&gt;
+p { color: red; }
+&lt;/style&gt;</code></pre>
+            </article>
+
+            <article class="card">
+                <h4>External</h4>
+                <p>Fica em um arquivo <code>.css</code> separado.</p>
+                <pre><code>&lt;link rel="stylesheet"
+href="style.css"&gt;</code></pre>
+                <strong>É o formato principal deste material.</strong>
+            </article>
+        </div>
+
+        <p class="internal-demo">
+            Este bloco é um exemplo de <strong>Internal CSS</strong>.
+        </p>
+    </section>
+
+    <!-- =========================================================
+         2. SELETORES / CASCATA
+         ========================================================= -->
+    <section class="section" id="seletores">
+        <span class="section-number">02</span>
+        <h2>Seletores, classes, IDs e Cascade</h2>
+
+        <div class="concept-grid">
+            <article class="card">
+                <h3>Elemento</h3>
+                <p>Seleciona todas as tags daquele tipo.</p>
+                <pre><code>p {
+    color: blue;
+}</code></pre>
+            </article>
+
+            <article class="card destaque">
+                <h3>Classe</h3>
+                <p>Pode ser reutilizada em vários elementos.</p>
+                <pre><code>.destaque {
+    background: yellow;
+}</code></pre>
+            </article>
+
+            <article class="card" id="card-especial">
+                <h3>ID</h3>
+                <p>Identifica um elemento específico.</p>
+                <pre><code>#card-especial {
+    border: 2px solid purple;
+}</code></pre>
+            </article>
+
+            <article class="card">
+                <h3>Descendente</h3>
+                <p>Seleciona um elemento dentro de outro.</p>
+                <pre><code>.card p {
+    font-size: 14px;
+}</code></pre>
+            </article>
+        </div>
+
+        <h3>Seletores combinados</h3>
+        <div class="selector-demo">
+            <p class="especial">Este parágrafo está dentro de <code>.selector-demo</code>.</p>
+            <p>Outro parágrafo para comparar.</p>
+            <button>Botão</button>
+        </div>
+
+        <div class="tip">
+            <strong>Regra prática:</strong>
+            prefira classes para estilização. IDs são mais específicos e costumam
+            ser mais difíceis de sobrescrever.
+        </div>
+
+        <h3>Cascade: quando duas regras disputam</h3>
+        <pre><code>p {
+    color: blue;
+}
+
+p {
+    color: red;
+}</code></pre>
+
+        <p>
+            As duas regras têm a mesma especificidade. Nesse exemplo,
+            a segunda aparece depois e vence.
+        </p>
+
+        <div class="warning">
+            <strong>Não decore o problema com !important.</strong>
+            <p>
+                <code>!important</code> altera a prioridade de uma declaração.
+                Pode ser útil em casos específicos, mas usar em excesso torna
+                o CSS difícil de manter.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         3. CORES
+         ========================================================= -->
+    <section class="section" id="cores">
+        <span class="section-number">03</span>
+        <h2>Cores</h2>
+
+        <div class="color-grid">
+            <div class="color-box color-name">Nome<br><code>tomato</code></div>
+            <div class="color-box color-hex">HEX<br><code>#2563eb</code></div>
+            <div class="color-box color-rgb">RGB<br><code>rgb(16,185,129)</code></div>
+            <div class="color-box color-rgba">RGBA<br><code>rgba(124,58,237,.65)</code></div>
+            <div class="color-box color-hsl">HSL<br><code>hsl(38,92%,50%)</code></div>
+        </div>
+
+        <div class="concept-grid compact">
+            <article class="card">
+                <h3>HEX</h3>
+                <p>Representa componentes de vermelho, verde e azul em hexadecimal.</p>
+                <code>#RRGGBB</code>
+            </article>
+            <article class="card">
+                <h3>RGB</h3>
+                <p>Define vermelho, verde e azul por valores numéricos.</p>
+                <code>rgb(255, 0, 0)</code>
+            </article>
+            <article class="card">
+                <h3>RGBA</h3>
+                <p>Adiciona o canal alpha, usado para transparência.</p>
+                <code>rgba(255,0,0,.5)</code>
+            </article>
+            <article class="card">
+                <h3>HSL</h3>
+                <p>Trabalha com matiz, saturação e luminosidade.</p>
+                <code>hsl(0, 100%, 50%)</code>
+            </article>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         4. BACKGROUND
+         ========================================================= -->
+    <section class="section" id="background">
+        <span class="section-number">04</span>
+        <h2>Background</h2>
+
+        <div class="background-demo">
+            <div class="background-content">
+                <h3>Imagem + gradiente + posicionamento</h3>
+                <p>
+                    O fundo deste bloco usa <code>background-image</code>,
+                    <code>background-size</code>,
+                    <code>background-position</code> e
+                    <code>background-repeat</code>.
+                </p>
+            </div>
+        </div>
+
+        <div class="concept-grid compact">
+            <article class="card">
+                <h3>background-color</h3>
+                <p>Define uma cor de fundo.</p>
+                <code>background-color: #fff;</code>
+            </article>
+            <article class="card">
+                <h3>background-image</h3>
+                <p>Coloca uma imagem ou gradiente no fundo.</p>
+                <code>background-image: url(...);</code>
+            </article>
+            <article class="card">
+                <h3>background-size</h3>
+                <p><code>cover</code> cobre a área; <code>contain</code> preserva a imagem inteira.</p>
+            </article>
+            <article class="card">
+                <h3>background-position</h3>
+                <p>Controla a posição da imagem, como <code>center</code>.</p>
+            </article>
+        </div>
+
+        <div class="tip">
+            <strong>Background ≠ &lt;img&gt;:</strong>
+            background faz parte da apresentação do elemento. Uma imagem
+            inserida com <code>&lt;img&gt;</code> é um elemento do conteúdo.
+        </div>
+    </section>
+
+    <!-- =========================================================
+         5. BOX MODEL
+         ========================================================= -->
+    <section class="section" id="box-model">
+        <span class="section-number">05</span>
+        <h2>Box Model — entenda a caixa</h2>
+
+        <div class="explain">
+            <p>
+                Todo elemento HTML pode ser pensado como uma caixa.
+                A ordem mental mais importante é:
+            </p>
+            <div class="flow-equation">
+                <span>CONTENT</span>
+                <b>→</b>
+                <span>PADDING</span>
+                <b>→</b>
+                <span>BORDER</span>
+                <b>→</b>
+                <span>MARGIN</span>
+            </div>
+        </div>
+
+        <div class="box-model-diagram">
+            <div class="bm-margin">
+                <span>MARGIN</span>
+                <div class="bm-border">
+                    <span>BORDER</span>
+                    <div class="bm-padding">
+                        <span>PADDING</span>
+                        <div class="bm-content">CONTENT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="concept-grid">
+            <article class="concept-card">
+                <h3>Content</h3>
+                <p>Texto, imagem ou conteúdo interno.</p>
+            </article>
+            <article class="concept-card">
+                <h3>Padding</h3>
+                <p>Espaço <strong>interno</strong> entre conteúdo e borda.</p>
+            </article>
+            <article class="concept-card">
+                <h3>Border</h3>
+                <p>A borda da caixa.</p>
+            </article>
+            <article class="concept-card">
+                <h3>Margin</h3>
+                <p>Espaço <strong>externo</strong> ao redor da caixa.</p>
+            </article>
+        </div>
+
+        <h3>content-box × border-box</h3>
+
+        <div class="box-comparison">
+            <div>
+                <h4>content-box</h4>
+                <div class="box-example content-box">
+                    width: 180px<br>
+                    padding: 20px<br>
+                    border: 5px
+                </div>
+            </div>
+
+            <div>
+                <h4>border-box</h4>
+                <div class="box-example border-box">
+                    width: 180px<br>
+                    padding: 20px<br>
+                    border: 5px
+                </div>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>Por que border-box é tão usado?</strong>
+            <p>
+                Com <code>border-box</code>, o <code>width</code> informado já
+                considera conteúdo + padding + border. Isso torna o dimensionamento
+                mais previsível.
+            </p>
+        </div>
+
+        <h3>Shorthand de padding e margin</h3>
+
+        <div class="shorthand-grid">
+            <div><code>padding: 20px;</code><span>todos os lados</span></div>
+            <div><code>padding: 10px 30px;</code><span>vertical | horizontal</span></div>
+            <div><code>padding: 10px 20px 30px;</code><span>top | horizontal | bottom</span></div>
+            <div><code>padding: 10px 20px 30px 40px;</code><span>top | right | bottom | left</span></div>
+        </div>
+
+        <h3>Margin collapse — um conceito importante</h3>
+        <div class="collapse-demo">
+            <div class="collapse-box">Elemento A — margin-bottom: 30px</div>
+            <div class="collapse-box">Elemento B — margin-top: 40px</div>
+        </div>
+        <p>
+            Em alguns layouts verticais, margens de elementos em fluxo podem
+            <strong>colapsar</strong>, fazendo com que o espaço final não seja
+            simplesmente a soma das duas margens. Flexbox e Grid não usam esse
+            mecanismo da mesma forma entre seus itens.
+        </p>
+    </section>
+
+    <!-- =========================================================
+         6. UNIDADES / TAMANHOS
+         ========================================================= -->
+    <section class="section" id="unidades">
+        <span class="section-number">06</span>
+        <h2>Unidades e dimensionamento</h2>
+
+        <div class="unit-grid">
+            <article class="card unit-px">
+                <h3>px</h3>
+                <p>Unidade absoluta em CSS. Útil quando queremos uma medida específica.</p>
+                <strong>20px</strong>
+            </article>
+
+            <article class="card unit-percent">
+                <h3>%</h3>
+                <p>Frequentemente depende do tamanho do elemento de referência.</p>
+                <div class="percent-inner">50%</div>
+            </article>
+
+            <article class="card unit-rem">
+                <h3>rem</h3>
+                <p>Relacionada ao tamanho da fonte do elemento raiz (<code>html</code>).</p>
+                <strong>2rem</strong>
+            </article>
+
+            <article class="card unit-vw">
+                <h3>vw / vh</h3>
+                <p>Relacionadas às dimensões da viewport.</p>
+                <strong>10vw / 10vh</strong>
+            </article>
+        </div>
+
+        <div class="tip">
+            <strong>Também conheça:</strong>
+            <code>em</code>, <code>rem</code>, <code>%</code>,
+            <code>vw</code>, <code>vh</code>, <code>min()</code>,
+            <code>max()</code> e <code>clamp()</code>.
+        </div>
+
+        <div class="clamp-demo">
+            <h3>clamp()</h3>
+            <p class="clamp-title">Este título usa font-size: clamp(1.8rem, 5vw, 3.5rem)</p>
+            <code>clamp(mínimo, valor preferencial, máximo)</code>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         7. TEXTO
+         ========================================================= -->
+    <section class="section" id="texto">
+        <span class="section-number">07</span>
+        <h2>Textos e fontes</h2>
+
+        <div class="text-demo">
+            <p class="text-center">text-align: center</p>
+            <p class="text-decoration">text-decoration: underline</p>
+            <p class="text-uppercase">text-transform: uppercase</p>
+            <p class="letter-spacing">letter-spacing: 4px</p>
+            <p class="font-style">font-style: italic</p>
+            <p class="font-weight">font-weight: 700</p>
+            <p class="font-size">font-size: 24px</p>
+            <p class="line-height">line-height melhora a leitura de textos com várias linhas.</p>
+        </div>
+
+        <div class="concept-grid compact">
+            <article class="card">
+                <h3>font-family</h3>
+                <p>Define a família tipográfica.</p>
+                <code>font-family: Arial, sans-serif;</code>
+            </article>
+            <article class="card">
+                <h3>font-size</h3>
+                <p>Controla o tamanho da fonte.</p>
+                <code>font-size: 1rem;</code>
+            </article>
+            <article class="card">
+                <h3>font-weight</h3>
+                <p>Controla o peso, como 400 ou 700.</p>
+                <code>font-weight: 700;</code>
+            </article>
+            <article class="card">
+                <h3>line-height</h3>
+                <p>Controla a altura das linhas.</p>
+                <code>line-height: 1.6;</code>
+            </article>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         8. DISPLAY
+         ========================================================= -->
+    <section class="section" id="display">
+        <span class="section-number">08</span>
+        <h2>Display — como o elemento participa do layout</h2>
+
+        <div class="display-table">
+            <div><strong>block</strong><span>Nova linha, ocupa a largura disponível por padrão.</span></div>
+            <div><strong>inline</strong><span>Participa do fluxo de texto.</span></div>
+            <div><strong>inline-block</strong><span>Fica na linha e aceita dimensões.</span></div>
+            <div><strong>flex</strong><span>Organiza filhos em uma dimensão.</span></div>
+            <div><strong>grid</strong><span>Organiza filhos em linhas e colunas.</span></div>
+            <div><strong>none</strong><span>Não aparece e não ocupa espaço no layout.</span></div>
+        </div>
+
+        <h3>Block</h3>
+        <div class="display-block">DIV — block</div>
+        <div class="display-block">DIV — outro block</div>
+
+        <h3>Inline</h3>
+        <span class="display-inline">SPAN 1</span>
+        <span class="display-inline">SPAN 2</span>
+        <span class="display-inline">SPAN 3</span>
+
+        <h3>Inline-block</h3>
+        <span class="display-inline-block">item 1</span>
+        <span class="display-inline-block">item 2</span>
+        <span class="display-inline-block">item 3</span>
+
+        <h3>display: none</h3>
+        <div class="display-none-example">Você não verá este bloco.</div>
+
+        <div class="tip">
+            <strong>Compare com visibility:</strong>
+            <code>visibility: hidden</code> esconde visualmente, mas o espaço
+            do elemento continua reservado.
+        </div>
+    </section>
+
+    <!-- =========================================================
+         9. FLEXBOX
+         ========================================================= -->
+    <section class="section" id="flexbox">
+        <span class="section-number">09</span>
+        <h2>Flexbox — layout em uma dimensão</h2>
+
+        <div class="explain">
+            <p>
+                Flexbox é excelente quando queremos organizar elementos em
+                <strong>uma dimensão</strong>: uma linha ou uma coluna.
+            </p>
+            <p>
+                O container vira <strong>flex container</strong> e seus filhos
+                diretos viram <strong>flex items</strong>.
+            </p>
+        </div>
+
+        <div class="axis-demo">
+            <div class="main-axis">→ EIXO PRINCIPAL</div>
+            <div class="cross-axis">↓ EIXO TRANSVERSAL</div>
+        </div>
+
+        <h3>Exemplo</h3>
+        <div class="flex-demo">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+
+        <div class="flex-controls">
+            <article class="card">
+                <h4>flex-direction</h4>
+                <code>row</code> / <code>column</code>
+                <p>Define a direção do eixo principal.</p>
+            </article>
+            <article class="card">
+                <h4>justify-content</h4>
+                <p>Distribui itens no eixo principal.</p>
+                <code>center</code> <code>space-between</code>
+            </article>
+            <article class="card">
+                <h4>align-items</h4>
+                <p>Alinha itens no eixo transversal.</p>
+                <code>center</code> <code>stretch</code>
+            </article>
+            <article class="card">
+                <h4>gap</h4>
+                <p>Cria espaço entre os itens.</p>
+                <code>gap: 16px;</code>
+            </article>
+        </div>
+
+        <div class="tip">
+            <strong>Teste:</strong> troque <code>row</code> por
+            <code>column</code>, depois altere
+            <code>justify-content</code> e <code>align-items</code>.
+        </div>
+    </section>
+
+    <!-- =========================================================
+         10. GRID
+         ========================================================= -->
+    <section class="section" id="grid">
+        <span class="section-number">10</span>
+        <h2>CSS Grid — linhas e colunas</h2>
+
+        <div class="explain">
+            <p>
+                Grid é indicado quando o layout precisa trabalhar com
+                <strong>duas dimensões</strong>: linhas <em>e</em> colunas.
+            </p>
+        </div>
+
+        <div class="grid-demo">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+        </div>
+
+        <div class="concept-grid compact">
+            <article class="card">
+                <h3>grid-template-columns</h3>
+                <p>Define as colunas.</p>
+                <code>repeat(3, 1fr)</code>
+            </article>
+            <article class="card">
+                <h3>grid-template-rows</h3>
+                <p>Define as linhas.</p>
+            </article>
+            <article class="card">
+                <h3>gap</h3>
+                <p>Espaço entre linhas e colunas.</p>
+            </article>
+            <article class="card">
+                <h3>1fr</h3>
+                <p>Uma fração do espaço disponível do grid.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         11. POSITION
+         ========================================================= -->
+    <section class="section" id="position">
+        <span class="section-number">11</span>
+        <h2>Position — um dos conceitos mais importantes</h2>
+
+        <div class="warning">
+            <strong>Position não significa simplesmente "mover".</strong>
+            <p>
+                A propriedade <code>position</code> define o modelo de
+                posicionamento do elemento e muda a forma como ele participa
+                do fluxo e/ou encontra sua referência.
+            </p>
+        </div>
+
+        <div class="position-summary">
+            <article>
+                <strong>static</strong>
+                <span>comportamento padrão</span>
+            </article>
+            <article>
+                <strong>relative</strong>
+                <span>mantém seu espaço e pode ser deslocado</span>
+            </article>
+            <article>
+                <strong>absolute</strong>
+                <span>sai do fluxo e procura um containing block</span>
+            </article>
+            <article>
+                <strong>fixed</strong>
+                <span>normalmente relacionado à viewport</span>
+            </article>
+            <article>
+                <strong>sticky</strong>
+                <span>participa do fluxo e pode "grudar"</span>
+            </article>
+        </div>
+
+        <h3>11.1 static</h3>
+        <div class="position-area">
+            <div class="static-box">position: static</div>
+            <div class="normal-box">Outro elemento continua no fluxo.</div>
+        </div>
+        <p class="small-note">
+            <code>top</code>, <code>right</code>, <code>bottom</code> e
+            <code>left</code> não deslocam um elemento static.
+        </p>
+
+        <h3>11.2 relative</h3>
+        <div class="position-area relative-area">
+            <div class="relative-box">
+                position: relative<br>
+                top: 20px<br>
+                left: 20px
+            </div>
+            <div class="normal-box">O espaço original continua reservado.</div>
+        </div>
+
+        <div class="tip">
+            <strong>Insight:</strong>
+            <code>relative</code> é muito usado no pai para criar uma referência
+            para um filho <code>absolute</code>.
+        </div>
+
+        <h3>11.3 absolute</h3>
+        <div class="absolute-parent">
+            <div class="absolute-child">absolute</div>
+            <p>
+                Este pai possui <code>position: relative</code>.
+                Por isso o filho absoluto usa esse contexto como referência.
+            </p>
+        </div>
+
+        <div class="warning">
+            <strong>Absolute sai do fluxo normal.</strong>
+            <p>
+                Ele não reserva espaço como um elemento normal. Para encontrar
+                sua referência, procura um ancestral adequado como
+                <code>relative</code>, <code>absolute</code>, <code>fixed</code>
+                ou <code>sticky</code>. Se não houver, o containing block inicial
+                pode ser usado.
+            </p>
+        </div>
+
+        <h3>11.4 O padrão mais usado: relative + absolute</h3>
+        <div class="card-image">
+            <div class="badge">NOVO</div>
+            <div class="fake-image"></div>
+            <h3>Card com badge</h3>
+            <p>
+                O card é <code>relative</code> e o badge é
+                <code>absolute</code>.
+            </p>
+        </div>
+
+        <pre><code>.card {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}</code></pre>
+
+        <h3>11.5 fixed</h3>
+        <div class="explain">
+            <p>
+                O botão "Topo" no canto inferior direito usa
+                <code>position: fixed</code>. Role a página para perceber
+                que ele permanece preso à viewport.
+            </p>
+        </div>
+
+        <h3>11.6 sticky</h3>
+        <div class="sticky-demo">
+            <div class="sticky-title">STICKY — role dentro desta área</div>
+            <p>
+                O título começa em seu lugar normal e, ao atingir
+                <code>top: 0</code>, fica preso dentro do seu contexto.
+            </p>
+            <p>Conteúdo para gerar rolagem...</p>
+            <div class="fake-lines">
+                <p>Linha 1</p>
+                <p>Linha 2</p>
+                <p>Linha 3</p>
+                <p>Linha 4</p>
+                <p>Linha 5</p>
+                <p>Linha 6</p>
+                <p>Linha 7</p>
+                <p>Linha 8</p>
+            </div>
+        </div>
+
+        <div class="position-table">
+            <div><strong>static</strong><span>fluxo normal</span></div>
+            <div><strong>relative</strong><span>fluxo + deslocamento visual</span></div>
+            <div><strong>absolute</strong><span>fora do fluxo + referência</span></div>
+            <div><strong>fixed</strong><span>preso à viewport em situações comuns</span></div>
+            <div><strong>sticky</strong><span>fluxo + comportamento de "grude"</span></div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         12. Z-INDEX
+         ========================================================= -->
+    <section class="section" id="z-index">
+        <span class="section-number">12</span>
+        <h2>Z-index — camadas e sobreposição</h2>
+
+        <div class="explain">
+            <p>
+                Quando elementos podem se sobrepor, <code>z-index</code> ajuda
+                a controlar a ordem de empilhamento.
+            </p>
+            <p>
+                Regra simplificada para começar:
+                <strong>maior z-index → camada mais acima</strong>,
+                desde que a comparação esteja acontecendo no contexto adequado.
+            </p>
+        </div>
+
+        <div class="z-demo">
+            <div class="z-box z-back">z-index: 1</div>
+            <div class="z-box z-middle">z-index: 5</div>
+            <div class="z-box z-front">z-index: 10</div>
+        </div>
+
+        <div class="warning">
+            <strong>Stacking context:</strong>
+            <p>
+                <code>z-index: 100</code> não significa que o elemento sempre
+                ficará acima de qualquer elemento com <code>z-index: 10</code>.
+                A comparação depende dos <strong>stacking contexts</strong>.
+            </p>
+        </div>
+
+        <h3>Outro exemplo de sobreposição</h3>
+        <div class="overlap-demo">
+            <div class="overlap one">1</div>
+            <div class="overlap two">2</div>
+            <div class="overlap three">3</div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         13. PSEUDO-CLASSES / PSEUDO-ELEMENTS
+         ========================================================= -->
+    <section class="section" id="pseudo">
+        <span class="section-number">13</span>
+        <h2>Pseudo-classes e pseudo-elementos</h2>
+
+        <div class="concept-grid">
+            <article class="card">
+                <h3>:hover</h3>
+                <p>Aplica estilo quando o cursor passa sobre o elemento.</p>
+                <button class="hover-button">Passe o mouse</button>
+            </article>
+
+            <article class="card">
+                <h3>:focus</h3>
+                <p>Ajuda a estilizar o elemento quando ele recebe foco.</p>
+                <input class="focus-input" placeholder="Clique aqui">
+            </article>
+
+            <article class="card">
+                <h3>:nth-child()</h3>
+                <p>Permite selecionar elementos pela posição.</p>
+                <div class="nth-list">
+                    <span>1</span><span>2</span><span>3</span><span>4</span>
+                </div>
+            </article>
+
+            <article class="card pseudo-element-demo">
+                <h3>::before / ::after</h3>
+                <p>Podem criar conteúdo visual gerado pelo CSS.</p>
+            </article>
+        </div>
+
+        <div class="tip">
+            <strong>Exemplos:</strong>
+            <code>a:hover</code>,
+            <code>input:focus</code>,
+            <code>li:nth-child(2)</code>,
+            <code>.card::before</code>.
+        </div>
+    </section>
+
+    <!-- =========================================================
+         14. OVERFLOW / OPACITY / SHADOW / TRANSFORM
+         ========================================================= -->
+    <section class="section" id="efeitos">
+        <span class="section-number">14</span>
+        <h2>Outras propriedades importantes</h2>
+
+        <div class="concept-grid">
+            <article class="card effect-card">
+                <h3>overflow</h3>
+                <p>Controla o que acontece quando o conteúdo ultrapassa a caixa.</p>
+                <code>hidden</code> · <code>auto</code> · <code>scroll</code>
+            </article>
+
+            <article class="card effect-card">
+                <h3>opacity</h3>
+                <p>Controla a opacidade visual do elemento.</p>
+                <div class="opacity-demo">opacity: .5</div>
+            </article>
+
+            <article class="card effect-card">
+                <h3>box-shadow</h3>
+                <p>Cria sombras ao redor da caixa.</p>
+                <div class="shadow-demo">sombra</div>
+            </article>
+
+            <article class="card effect-card">
+                <h3>transform</h3>
+                <p>Permite transformações como escala, rotação e deslocamento visual.</p>
+                <div class="transform-demo">hover</div>
+            </article>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         15. RESPONSIVIDADE
+         ========================================================= -->
+    <section class="section" id="responsividade">
+        <span class="section-number">15</span>
+        <h2>Responsividade — Media Queries</h2>
+
+        <div class="explain">
+            <p>
+                Uma interface responsiva adapta o layout a diferentes tamanhos
+                de tela. <code>@media</code> permite aplicar regras condicionais.
+            </p>
+        </div>
+
+        <pre><code>@media (max-width: 800px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+
+        <div class="responsive-demo">
+            <div>COLUNA 1</div>
+            <div>COLUNA 2</div>
+            <div>COLUNA 3</div>
+        </div>
+
+        <div class="concept-grid compact">
+            <article class="card">
+                <h3>Mobile-first</h3>
+                <p>Comece pelo layout menor e adicione regras para telas maiores.</p>
+            </article>
+            <article class="card">
+                <h3>max-width</h3>
+                <p>Aplica regras até determinado limite.</p>
+            </article>
+            <article class="card">
+                <h3>min-width</h3>
+                <p>Aplica regras a partir de determinado limite.</p>
+            </article>
+            <article class="card">
+                <h3>Viewport</h3>
+                <p>O meta viewport ajuda o navegador a interpretar corretamente a largura em dispositivos móveis.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         16. DESAFIO
+         ========================================================= -->
+    <section class="section challenge" id="desafio">
+        <span class="section-number">16</span>
+        <h2>Desafio final — não altere o HTML</h2>
+
+        <p>
+            Faça todos os exercícios somente no <code>style.css</code>.
+        </p>
+
+        <ol>
+            <li>Troque as cores do material.</li>
+            <li>Altere o Box Model e compare <code>content-box</code> e <code>border-box</code>.</li>
+            <li>Troque um layout Flexbox para coluna.</li>
+            <li>Transforme um exemplo Grid de 3 para 2 colunas.</li>
+            <li>Mude a posição do badge.</li>
+            <li>Teste <code>display: none</code> e <code>visibility: hidden</code>.</li>
+            <li>Coloque um filho como <code>absolute</code> e remova o <code>relative</code> do pai.</li>
+            <li>Depois coloque o pai novamente como <code>relative</code>.</li>
+            <li>Altere os <code>z-index</code> e observe a sobreposição.</li>
+            <li>Teste <code>position: sticky</code> com valores diferentes de <code>top</code>.</li>
+            <li>Altere <code>flex-direction</code>, <code>justify-content</code> e <code>align-items</code>.</li>
+            <li>Faça a página funcionar melhor em uma janela pequena.</li>
+        </ol>
+
+        <div class="challenge-card">
+            <span class="challenge-badge">DESAFIO</span>
+            <h3>Monte seu próprio componente</h3>
+            <p>
+                Crie visualmente um card usando, no mesmo componente:
+                <strong>Box Model + Flex/Grid + Position + Z-index + pseudo-class</strong>.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<a class="fixed-button" href="#topo">↑ Topo</a>
+
+<footer>
+    <div class="container">
+        <p>Material de estudo — CSS com exemplos práticos.</p>
+        <p class="footer-small">
+            Dica: abra o DevTools do navegador e inspecione cada elemento.
+            Observe o Box Model, os estilos aplicados e quais regras foram sobrescritas.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1291 @@
+/*
+====================================================================
+CSS — GUIA PRÁTICO E DIDÁTICO
+====================================================================
+
+ESTRATÉGIA DE ESTUDO
+
+1. Abra index.html com Live Server.
+2. Leia o exemplo.
+3. Encontre a classe correspondente neste arquivo.
+4. Altere UMA propriedade.
+5. Salve.
+6. Observe o navegador.
+7. Tente prever o próximo resultado.
+
+A ideia não é decorar propriedades. É entender:
+- quem está sendo selecionado;
+- qual modelo de layout está sendo usado;
+- qual é a referência do elemento;
+- como o Box Model altera o tamanho;
+- como o fluxo do documento funciona;
+- como as regras entram em conflito.
+
+====================================================================
+*/
+
+/* ================================================================
+   0. RESET / BASE
+   ================================================================ */
+
+/*
+   O seletor universal * seleciona todos os elementos.
+
+   box-sizing: border-box é muito usado porque torna o tamanho
+   declarado mais previsível:
+
+       width = content + padding + border
+
+   sem adicionar padding e border "por fora" da largura declarada.
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+code {
+    background: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #6d28d9;
+}
+
+pre {
+    overflow-x: auto;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px;
+    border-radius: 10px;
+    line-height: 1.5;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin-inline: auto;
+}
+
+/* ================================================================
+   1. HEADER / NAVEGAÇÃO
+   ================================================================ */
+
+.topo {
+    background: linear-gradient(135deg, #172554, #312e81);
+    color: white;
+    padding: 55px 0 35px;
+}
+
+.eyebrow {
+    margin: 0;
+    letter-spacing: 3px;
+    font-size: .8rem;
+    font-weight: 700;
+    opacity: .8;
+}
+
+.topo h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+}
+
+.hero-text {
+    max-width: 760px;
+    color: #dbeafe;
+    font-size: 1.05rem;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 8px;
+    transition: .2s ease;
+}
+
+.menu a:hover {
+    background: rgba(255,255,255,.15);
+    transform: translateY(-2px);
+}
+
+/* ================================================================
+   2. SEÇÕES
+   ================================================================ */
+
+.section {
+    position: relative;
+    background: white;
+    margin: 35px 0;
+    padding: 32px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(15,23,42,.05);
+}
+
+.section-number {
+    display: inline-block;
+    padding: 4px 9px;
+    margin-bottom: 8px;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.section h2 {
+    margin: 0 0 18px;
+    color: #172554;
+    border-bottom: 2px solid #dbeafe;
+    padding-bottom: 10px;
+}
+
+.section h3 {
+    margin-top: 28px;
+    color: #1e3a8a;
+}
+
+.section h4 {
+    margin-top: 0;
+}
+
+.explain {
+    padding: 18px;
+    background: #f8fafc;
+    border-left: 5px solid #64748b;
+    border-radius: 8px;
+}
+
+.explain p:first-child {
+    margin-top: 0;
+}
+
+.explain p:last-child {
+    margin-bottom: 0;
+}
+
+.tip,
+.warning {
+    margin: 20px 0;
+    padding: 16px 18px;
+    border-radius: 8px;
+}
+
+.tip {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+}
+
+.warning {
+    background: #fff7ed;
+    border-left: 5px solid #f97316;
+}
+
+.small-note {
+    color: #64748b;
+    font-size: .92rem;
+}
+
+/* ================================================================
+   3. GRIDS DE APOIO
+   ================================================================ */
+
+.concept-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.concept-grid.compact {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.card,
+.concept-card {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.concept-card {
+    border-top: 4px solid #3b82f6;
+}
+
+.concept-card h3 {
+    margin-top: 0;
+}
+
+.card p:last-child,
+.concept-card p:last-child {
+    margin-bottom: 0;
+}
+
+.destaque {
+    background: #eff6ff;
+    border-color: #60a5fa;
+}
+
+#card-especial {
+    border: 3px solid #8b5cf6;
+}
+
+/* ================================================================
+   4. SELETORES / CASCATA
+   ================================================================ */
+
+/*
+   Exemplo de seletor por elemento:
+*/
+p {
+    color: #475569;
+}
+
+/*
+   .classe seleciona elementos que possuem a classe.
+*/
+.selector-demo {
+    padding: 20px;
+    border: 2px dashed #94a3b8;
+    border-radius: 10px;
+}
+
+.selector-demo .especial {
+    color: #7c3aed;
+    font-weight: 700;
+}
+
+/*
+   .card p significa:
+   "selecione p que esteja dentro de .card".
+
+   Isso é diferente de .card, que selecionaria o próprio card.
+*/
+.card p {
+    font-size: .95rem;
+}
+
+/*
+   O CSS é "cascading" porque várias regras podem atingir
+   o mesmo elemento.
+
+   Em termos simplificados, entram em jogo:
+   - origem/importância;
+   - especificidade;
+   - ordem das regras.
+
+   !important deve ser exceção, não estratégia padrão.
+*/
+
+/* ================================================================
+   5. ANATOMIA VISUAL
+   ================================================================ */
+
+.syntax-demo {
+    margin: 20px 0;
+    padding: 20px;
+    background: #0f172a;
+    border-radius: 10px;
+    font-family: Consolas, monospace;
+    color: white;
+}
+
+.syntax-line {
+    line-height: 1.8;
+}
+
+.indent {
+    padding-left: 30px;
+}
+
+.token-selector {
+    color: #60a5fa;
+}
+
+.token-property {
+    color: #c4b5fd;
+}
+
+.token-value {
+    color: #86efac;
+}
+
+.flow-equation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.flow-equation span {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #dbeafe;
+}
+
+.flow-equation b {
+    color: #64748b;
+}
+
+/* ================================================================
+   6. CORES
+   ================================================================ */
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.color-box {
+    min-height: 110px;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+.color-box code {
+    color: white;
+    background: rgba(0,0,0,.2);
+}
+
+.color-name { background: tomato; }
+.color-hex { background: #2563eb; }
+.color-rgb { background: rgb(16,185,129); }
+.color-rgba { background: rgba(124,58,237,.65); }
+.color-hsl { background: hsl(38,92%,50%); }
+
+/* ================================================================
+   7. BACKGROUND
+   ================================================================ */
+
+.background-demo {
+    min-height: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+
+    /*
+       Podemos combinar várias imagens de background.
+
+       A primeira camada é o gradiente.
+       A segunda é a imagem.
+
+       O gradiente escuro funciona como "overlay".
+    */
+    background-image:
+        linear-gradient(
+            rgba(15,23,42,.60),
+            rgba(15,23,42,.60)
+        ),
+        url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80");
+
+    /*
+       cover = cobre a caixa inteira.
+       A imagem pode ser cortada.
+    */
+    background-size: cover;
+
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-content {
+    min-height: 320px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.background-content p {
+    color: white;
+}
+
+/* ================================================================
+   8. BOX MODEL
+   ================================================================ */
+
+.box-model-diagram {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    overflow-x: auto;
+}
+
+.bm-margin {
+    min-width: 330px;
+    padding: 35px;
+    background: #fef3c7;
+    border: 1px dashed #92400e;
+    text-align: center;
+    font-weight: 700;
+}
+
+.bm-border {
+    padding: 25px;
+    background: #bfdbfe;
+    border: 8px solid #2563eb;
+}
+
+.bm-padding {
+    padding: 25px;
+    background: #dcfce7;
+    border: 1px dashed #166534;
+}
+
+.bm-content {
+    min-height: 80px;
+    display: grid;
+    place-items: center;
+    background: white;
+    border: 2px solid #111827;
+}
+
+.box-comparison {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.box-comparison > div {
+    flex: 1 1 260px;
+}
+
+.box-example {
+    width: 180px;
+    height: 140px;
+    padding: 20px;
+    border: 5px solid #2563eb;
+    background: #eff6ff;
+}
+
+.content-box {
+    box-sizing: content-box;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.shorthand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+}
+
+.shorthand-grid > div {
+    padding: 15px;
+    border: 2px solid #f59e0b;
+    background: #fffbeb;
+    border-radius: 8px;
+}
+
+.shorthand-grid span {
+    display: block;
+    margin-top: 8px;
+    color: #64748b;
+}
+
+.collapse-demo {
+    border: 2px dashed #cbd5e1;
+    padding: 10px;
+}
+
+.collapse-box {
+    padding: 15px;
+    background: #e0e7ff;
+    border: 2px solid #6366f1;
+}
+
+.collapse-box:first-child {
+    margin-bottom: 30px;
+}
+
+.collapse-box:last-child {
+    margin-top: 40px;
+}
+
+/* ================================================================
+   9. UNIDADES
+   ================================================================ */
+
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 16px;
+}
+
+.unit-px strong {
+    font-size: 20px;
+}
+
+.unit-percent .percent-inner {
+    width: 50%;
+    padding: 10px;
+    background: #bfdbfe;
+    text-align: center;
+}
+
+.unit-rem strong {
+    font-size: 2rem;
+}
+
+.unit-vw strong {
+    font-size: 2vw;
+}
+
+.clamp-demo {
+    margin-top: 20px;
+    padding: 20px;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 12px;
+}
+
+.clamp-title {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* ================================================================
+   10. TEXTOS
+   ================================================================ */
+
+.text-demo {
+    padding: 20px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+}
+
+.text-center { text-align: center; }
+.text-decoration { text-decoration: underline; }
+.text-uppercase { text-transform: uppercase; }
+.letter-spacing { letter-spacing: 4px; }
+.font-style { font-style: italic; }
+.font-weight { font-weight: 700; }
+.font-size { font-size: 24px; }
+.line-height {
+    max-width: 650px;
+    line-height: 2;
+}
+
+/* ================================================================
+   11. DISPLAY
+   ================================================================ */
+
+/*
+   BLOCK
+   - normalmente começa em nova linha;
+   - pode ocupar a largura disponível;
+   - width/height funcionam normalmente.
+
+   INLINE
+   - participa do fluxo de texto;
+   - width/height não se comportam como em block.
+
+   INLINE-BLOCK
+   - continua na linha;
+   - permite dimensões como width/height.
+
+   FLEX / GRID
+   - criam modelos de layout para os filhos.
+
+   NONE
+   - remove o elemento do layout.
+*/
+
+.display-table {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.display-table > div {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.display-block {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background: #dbeafe;
+    border: 2px solid #2563eb;
+}
+
+.display-inline {
+    display: inline;
+    padding: 10px;
+    background: #dcfce7;
+    border: 2px solid #16a34a;
+}
+
+.display-inline-block {
+    display: inline-block;
+    width: 160px;
+    padding: 15px;
+    margin: 5px;
+    background: #fef3c7;
+    border: 2px solid #d97706;
+}
+
+.display-none-example {
+    display: none;
+}
+
+/* ================================================================
+   12. FLEXBOX
+   ================================================================ */
+
+.axis-demo {
+    position: relative;
+    min-height: 130px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px dashed #94a3b8;
+    background: #f8fafc;
+}
+
+.main-axis {
+    padding: 10px;
+    background: #dbeafe;
+    font-weight: 700;
+}
+
+.cross-axis {
+    width: max-content;
+    margin: 10px auto;
+    padding: 10px;
+    background: #dcfce7;
+    font-weight: 700;
+}
+
+.flex-demo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    min-height: 130px;
+    padding: 20px;
+    background: #e0e7ff;
+    border-radius: 10px;
+}
+
+.flex-demo div {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+    background: #4338ca;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.flex-controls {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* ================================================================
+   13. GRID
+   ================================================================ */
+
+.grid-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.grid-demo div {
+    min-height: 90px;
+    display: grid;
+    place-items: center;
+    background: #ede9fe;
+    border: 2px solid #7c3aed;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* ================================================================
+   14. POSITION
+   ================================================================ */
+
+/*
+   O ponto central:
+
+   position: static
+       comportamento padrão.
+
+   position: relative
+       continua no fluxo e pode ser deslocado visualmente.
+       Também é muito usado para estabelecer referência para absolute.
+
+   position: absolute
+       sai do fluxo normal.
+       Procura um containing block adequado.
+
+   position: fixed
+       normalmente se posiciona em relação à viewport e não acompanha
+       o fluxo comum durante a rolagem.
+
+   position: sticky
+       começa participando do fluxo e pode ficar preso ao atingir
+       um limite como top: 0.
+*/
+
+.position-summary {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    gap: 8px;
+}
+
+.position-summary article {
+    min-height: 110px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.position-summary strong {
+    color: #1d4ed8;
+}
+
+.position-summary span {
+    color: #64748b;
+    font-size: .9rem;
+}
+
+.position-area {
+    min-height: 150px;
+    padding: 20px;
+    background: #f1f5f9;
+    border: 2px dashed #94a3b8;
+}
+
+.static-box {
+    position: static;
+    width: 180px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #cbd5e1;
+    border: 2px solid #475569;
+}
+
+.normal-box {
+    padding: 15px;
+    background: #e2e8f0;
+    border: 2px solid #94a3b8;
+}
+
+.relative-area {
+    overflow: visible;
+}
+
+.relative-box {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    width: 220px;
+    padding: 15px;
+    margin-bottom: 30px;
+    background: #bfdbfe;
+    border: 3px solid #2563eb;
+}
+
+.absolute-parent {
+    position: relative;
+    min-height: 180px;
+    padding: 25px;
+    background: #ecfccb;
+    border: 3px solid #65a30d;
+}
+
+.absolute-child {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 15px 25px;
+    background: #16a34a;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.card-image {
+    position: relative;
+    width: min(100%, 400px);
+    padding: 20px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.fake-image {
+    height: 150px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border-radius: 10px;
+}
+
+.badge {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 2;
+    padding: 5px 10px;
+    background: #dc2626;
+    color: white;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.fixed-button {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 1000;
+    padding: 12px 18px;
+    background: #172554;
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(15,23,42,.25);
+}
+
+.sticky-demo {
+    height: 330px;
+    overflow-y: auto;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.sticky-title {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    padding: 15px;
+    background: #172554;
+    color: white;
+    font-weight: 700;
+}
+
+.fake-lines {
+    min-height: 500px;
+    padding: 10px 20px;
+}
+
+.position-table {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.position-table div {
+    padding: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+}
+
+.position-table span {
+    display: block;
+    margin-top: 5px;
+    color: #64748b;
+    font-size: .85rem;
+}
+
+/* ================================================================
+   15. Z-INDEX / STACKING
+   ================================================================ */
+
+.z-demo {
+    position: relative;
+    height: 270px;
+    background: #f8fafc;
+    border: 2px dashed #94a3b8;
+    overflow: hidden;
+}
+
+.z-box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: 700;
+    border-radius: 15px;
+}
+
+.z-back {
+    top: 30px;
+    left: 100px;
+    z-index: 1;
+    background: #2563eb;
+}
+
+.z-middle {
+    top: 60px;
+    left: 170px;
+    z-index: 5;
+    background: #16a34a;
+}
+
+.z-front {
+    top: 90px;
+    left: 240px;
+    z-index: 10;
+    background: #dc2626;
+}
+
+.overlap-demo {
+    position: relative;
+    height: 270px;
+}
+
+.overlap {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.one {
+    top: 20px;
+    left: 80px;
+    z-index: 1;
+    background: #2563eb;
+}
+
+.two {
+    top: 70px;
+    left: 150px;
+    z-index: 2;
+    background: #7c3aed;
+}
+
+.three {
+    top: 120px;
+    left: 220px;
+    z-index: 3;
+    background: #dc2626;
+}
+
+/* ================================================================
+   16. PSEUDO-CLASSES / PSEUDO-ELEMENTS
+   ================================================================ */
+
+.hover-button {
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.hover-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.focus-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+}
+
+.focus-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+.nth-list {
+    display: flex;
+    gap: 8px;
+}
+
+.nth-list span {
+    padding: 10px 14px;
+    background: #e2e8f0;
+    border-radius: 6px;
+}
+
+.nth-list span:nth-child(2) {
+    background: #c4b5fd;
+    font-weight: 700;
+}
+
+.pseudo-element-demo {
+    position: relative;
+}
+
+.pseudo-element-demo::before {
+    content: "CSS";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #7c3aed;
+    color: white;
+    font-size: .7rem;
+}
+
+/* ================================================================
+   17. OUTRAS PROPRIEDADES ÚTEIS
+   ================================================================ */
+
+.effect-card {
+    overflow: hidden;
+}
+
+.opacity-demo {
+    padding: 20px;
+    margin-top: 10px;
+    background: #2563eb;
+    color: white;
+    opacity: .5;
+    border-radius: 8px;
+}
+
+.shadow-demo {
+    margin-top: 10px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(15,23,42,.20);
+}
+
+.transform-demo {
+    width: 100px;
+    margin: 20px auto 5px;
+    padding: 15px 5px;
+    text-align: center;
+    background: #c4b5fd;
+    border-radius: 8px;
+    transition: transform .2s ease;
+}
+
+.transform-demo:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* ================================================================
+   18. RESPONSIVIDADE
+   ================================================================ */
+
+.responsive-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.responsive-demo div {
+    padding: 30px;
+    text-align: center;
+    background: #dbeafe;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+}
+
+.challenge {
+    background: #172554;
+    color: white;
+}
+
+.challenge h2,
+.challenge p,
+.challenge li {
+    color: white;
+}
+
+.challenge code {
+    color: #e9d5ff;
+    background: rgba(255,255,255,.12);
+}
+
+.challenge-card {
+    position: relative;
+    margin-top: 25px;
+    padding: 30px;
+    background: #312e81;
+    border: 2px solid #818cf8;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.challenge-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+    padding: 5px 10px;
+    background: #f59e0b;
+    color: #111827;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+/* ================================================================
+   19. FOOTER
+   ================================================================ */
+
+footer {
+    padding: 40px 0;
+    background: #0f172a;
+    color: white;
+}
+
+footer p {
+    color: #cbd5e1;
+}
+
+.footer-small {
+    font-size: .9rem;
+}
+
+/* ================================================================
+   20. MEDIA QUERIES
+   ================================================================ */
+
+/*
+   Aqui demonstramos responsividade.
+
+   Em telas menores:
+   - grids viram uma coluna;
+   - o Flexbox pode quebrar;
+   - os blocos ficam mais confortáveis.
+
+   Teste diminuindo a largura da janela do navegador.
+*/
+
+@media (max-width: 800px) {
+
+    .concept-grid,
+    .concept-grid.compact,
+    .three-columns,
+    .unit-grid,
+    .flex-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .color-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .display-table,
+    .shorthand-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .position-summary,
+    .position-table {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .responsive-demo {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 22px;
+    }
+
+    .box-comparison {
+        gap: 25px;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .color-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .position-summary,
+    .position-table {
+        grid-template-columns: 1fr;
+    }
+
+    .flex-demo {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu a {
+        font-size: .85rem;
+    }
+
+    .fixed-button {
+        right: 15px;
+        bottom: 15px;
+    }
+}

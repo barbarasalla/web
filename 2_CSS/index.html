@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de CSS</title>
+
+    <!-- CSS interno: exemplo da aula "Internal CSS" -->
+    <style>
+        .internal-css {
+            color: purple;
+        }
+    </style>
+
+    <!-- CSS externo: principal arquivo usado neste material -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         INTRODUÇÃO / ANATOMIA DO CSS
+         ========================================================= -->
+
+    <!--
+        CSS é usado para estilizar os elementos HTML.
+
+        Anatomia:
+
+        seletor {
+            propriedade: valor;
+        }
+    -->
+
+    <h1 class="titulo">Estudo de CSS</h1>
+
+
+    <!-- =========================================================
+         MANEIRAS DE ADICIONAR CSS
+         ========================================================= -->
+
+    <!-- Inline CSS: CSS escrito diretamente no elemento -->
+    <p style="color: red;">
+        CSS Inline
+    </p>
+
+    <!-- Internal CSS: regra criada dentro da tag <style> do HTML -->
+    <p class="internal-css">
+        CSS Internal
+    </p>
+
+    <!-- External CSS: este elemento é estilizado pelo style.css -->
+    <p class="external-css">
+        CSS External
+    </p>
+
+
+    <!-- =========================================================
+         MÚLTIPLAS REGRAS DE CSS
+         ========================================================= -->
+
+    <!-- Um mesmo elemento pode receber várias propriedades -->
+    <p class="multiplas-regras">
+        Várias regras de CSS
+    </p>
+
+
+    <!-- =========================================================
+         COMENTÁRIOS
+         ========================================================= -->
+
+    <!--
+        Comentários HTML não aparecem na página.
+
+        No CSS usamos:
+        /* comentário */
+    -->
+
+    <p class="comentario-css">
+        Exemplo de comentário no CSS
+    </p>
+
+
+    <!-- =========================================================
+         CLASSES E IDS
+         ========================================================= -->
+
+    <!-- Classe: pode ser reutilizada em vários elementos -->
+    <p class="texto-classe">
+        Elemento com classe
+    </p>
+
+    <p class="texto-classe">
+        Outro elemento usando a mesma classe
+    </p>
+
+    <!-- ID: identifica um elemento específico -->
+    <p id="texto-id">
+        Elemento com ID
+    </p>
+
+
+    <!-- =========================================================
+         ORDEM DOS SELETORES / ESPECIFICIDADE
+         ========================================================= -->
+
+    <p class="ordem-seletor" id="ordem-seletor-id">
+        Exemplo de especificidade
+    </p>
+
+
+    <!-- =========================================================
+         CORES
+         ========================================================= -->
+
+    <!-- Nome da cor -->
+    <p class="cor-nome">
+        Cor usando nome
+    </p>
+
+    <!-- Hexadecimal -->
+    <p class="cor-hex">
+        Cor usando HEX
+    </p>
+
+    <!-- RGB -->
+    <p class="cor-rgb">
+        Cor usando RGB
+    </p>
+
+    <!-- RGBA -->
+    <p class="cor-rgba">
+        Cor usando RGBA
+    </p>
+
+    <!-- HSL -->
+    <p class="cor-hsl">
+        Cor usando HSL
+    </p>
+
+
+    <!-- =========================================================
+         BACKGROUND
+         ========================================================= -->
+
+    <!-- Cor de fundo -->
+    <div class="background-color">
+        Background color
+    </div>
+
+    <!-- Background com RGBA -->
+    <div class="background-rgba">
+        Background com RGBA
+    </div>
+
+    <!-- Imagem no background -->
+    <div class="background-image">
+        Background image
+    </div>
+
+
+    <!-- =========================================================
+         BOX MODEL
+         ========================================================= -->
+
+    <!--
+        Box Model:
+
+        +----------------------+
+        |       MARGIN         |
+        |  +----------------+  |
+        |  |    BORDER      |  |
+        |  |  +----------+  |  |
+        |  |  | PADDING  |  |  |
+        |  |  | +------+ |  |  |
+        |  |  | |CONTENT| |  |  |
+        |  |  | +------+ |  |  |
+        |  |  +----------+  |  |
+        |  +----------------+  |
+        +----------------------+
+    -->
+
+    <!-- Content -->
+    <div class="box-content">
+        Content
+    </div>
+
+    <!-- Width -->
+    <div class="box-width">
+        Width: 200px
+    </div>
+
+    <!-- Height -->
+    <div class="box-height">
+        Height: 100px
+    </div>
+
+    <!-- Padding -->
+    <div class="box-padding">
+        Padding
+    </div>
+
+    <!-- Padding individual -->
+    <div class="padding-individual">
+        Padding individual
+    </div>
+
+    <!-- Padding shorthand -->
+    <div class="padding-shorthand">
+        Padding shorthand
+    </div>
+
+    <!-- Border -->
+    <div class="box-border">
+        Border
+    </div>
+
+    <!-- Border individual -->
+    <div class="border-individual">
+        Border individual
+    </div>
+
+    <!-- Border radius -->
+    <div class="border-radius">
+        Border radius
+    </div>
+
+    <!-- Margin -->
+    <div class="box-margin">
+        Margin
+    </div>
+
+    <!-- Box Model completo -->
+    <div class="box-model-completo">
+        Content + Padding + Border + Margin
+    </div>
+
+    <!-- Content-box -->
+    <div class="content-box">
+        box-sizing: content-box
+    </div>
+
+    <!-- Border-box -->
+    <div class="border-box">
+        box-sizing: border-box
+    </div>
+
+
+    <!-- =========================================================
+         TEXTO
+         ========================================================= -->
+
+    <!-- Alinhamento -->
+    <p class="text-align">
+        Alinhamento do texto
+    </p>
+
+    <!-- Decoração -->
+    <p class="text-decoration">
+        Decoração do texto
+    </p>
+
+    <!-- Transformação -->
+    <p class="text-transform">
+        transformação do texto
+    </p>
+
+    <!-- Espaçamento entre letras -->
+    <p class="letter-spacing">
+        Espaçamento entre letras
+    </p>
+
+
+    <!-- =========================================================
+         FONTES
+         ========================================================= -->
+
+    <!-- Família da fonte -->
+    <p class="font-family">
+        Família da fonte
+    </p>
+
+    <!-- Estilo da fonte -->
+    <p class="font-style">
+        Estilo da fonte
+    </p>
+
+    <!-- Peso da fonte -->
+    <p class="font-weight">
+        Peso da fonte
+    </p>
+
+    <!-- Tamanho da fonte -->
+    <p class="font-size">
+        Tamanho da fonte
+    </p>
+
+
+    <!-- =========================================================
+         DISPLAY
+         ========================================================= -->
+
+    <!--
+        display: block
+        Ocupa uma linha inteira por padrão.
+    -->
+    <div class="display-block">
+        Display Block
+    </div>
+
+    <div class="display-block">
+        Outro Block
+    </div>
+
+
+    <!--
+        display: inline
+        Permite que os elementos fiquem na mesma linha.
+    -->
+    <span class="display-inline">
+        Inline 1
+    </span>
+
+    <span class="display-inline">
+        Inline 2
+    </span>
+
+
+    <!--
+        display: inline-block
+        Fica na mesma linha, mas permite width e height.
+    -->
+    <div class="display-inline-block">
+        Inline-block 1
+    </div>
+
+    <div class="display-inline-block">
+        Inline-block 2
+    </div>
+
+
+    <!--
+        display: flex
+        Cria um flex container.
+    -->
+    <div class="display-flex">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+
+
+    <!--
+        display: grid
+        Cria um grid de linhas e colunas.
+    -->
+    <div class="display-grid">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+
+
+    <!--
+        display: none
+        Esconde o elemento e remove seu espaço do layout.
+    -->
+    <div class="display-none">
+        Você não verá este elemento.
+    </div>
+
+
+    <!-- =========================================================
+         POSITION: STATIC
+         ========================================================= -->
+
+    <!--
+        static é o valor padrão de position.
+    -->
+    <div class="position-static">
+        Position Static
+    </div>
+
+
+    <!-- =========================================================
+         POSITION: RELATIVE
+         ========================================================= -->
+
+    <!--
+        relative:
+        - mantém o espaço original;
+        - permite usar top, right, bottom e left.
+    -->
+    <div class="position-relative">
+        Position Relative
+    </div>
+
+
+    <!-- =========================================================
+         POSITION: ABSOLUTE
+         ========================================================= -->
+
+    <!--
+        O pai está relative.
+        Por isso o filho absolute usa o pai como referência.
+    -->
+    <div class="pai-relative">
+
+        <div class="filho-absolute">
+            Position Absolute
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         RELATIVE + ABSOLUTE
+         ========================================================= -->
+
+    <!-- Exemplo comum: badge dentro de um card -->
+    <div class="card-relative">
+
+        <span class="badge-absolute">
+            NOVO
+        </span>
+
+        <h2>Card</h2>
+
+        <p>
+            O pai é relative e o badge é absolute.
+        </p>
+
+    </div>
+
+
+    <!-- =========================================================
+         POSITION FIXED
+         ========================================================= -->
+
+    <!--
+        Fica preso à viewport.
+        Role a página para perceber.
+    -->
+    <div class="position-fixed">
+        Fixed
+    </div>
+
+
+    <!-- =========================================================
+         POSITION STICKY
+         ========================================================= -->
+
+    <div class="sticky-container">
+
+        <div class="position-sticky">
+            Sticky
+        </div>
+
+        <p>Conteúdo 1</p>
+        <p>Conteúdo 2</p>
+        <p>Conteúdo 3</p>
+        <p>Conteúdo 4</p>
+        <p>Conteúdo 5</p>
+        <p>Conteúdo 6</p>
+
+    </div>
+
+
+    <!-- =========================================================
+         Z-INDEX
+         ========================================================= -->
+
+    <!--
+        z-index controla a ordem de sobreposição.
+
+        Para o exemplo funcionar, os elementos estão posicionados.
+    -->
+    <div class="z-index-container">
+
+        <div class="z-index-1">
+            z-index: 1
+        </div>
+
+        <div class="z-index-2">
+            z-index: 2
+        </div>
+
+        <div class="z-index-3">
+            z-index: 3
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         FIM
+         ========================================================= -->
+
+    <div class="espaco-final"></div>
+
+</body>
+</html>

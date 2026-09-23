@@ -1,0 +1,839 @@
+/* ESTUDO DE CSS
+
+
+/* 1. ANATOMIA DO CSS
+/*
+Seletor {
+    propriedade: valor;
+}
+*/
+
+.titulo {
+    color: darkblue;
+}
+
+
+/* 2. EXTERNAL CSS
+/*
+/* Este elemento está sendo estilizado pelo arquivo externo. */
+.external-css {
+    color: green;
+}
+
+
+/* 3. MÚLTIPLAS REGRAS
+/*
+O mesmo seletor pode receber várias propriedades.*/
+.multiplas-regras {
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* 4. COMENTÁRIOS
+/*
+Este é um comentário CSS.
+
+Comentários não são exibidos no navegador.
+*/
+.comentario-css {
+    color: brown;
+}
+
+
+/* 5. CLASSES
+/*
+Classe é criada com ponto.
+Pode ser usada em vários elementos.
+*/
+.texto-classe {
+    color: navy;
+}
+
+
+/* 6. ID
+/*
+ID é criado com #.
+Normalmente identifica um elemento específico.*/
+#texto-id {
+    color: darkred;
+}
+
+
+/* 7. ORDEM / ESPECIFICIDADE
+/*
+Quando mais de uma regra se aplica ao mesmo elemento,
+a especificidade influencia qual regra será aplicada.
+
+Neste exemplo:
+p               -> seletor de elemento
+.ordem-seletor  -> classe
+#ordem-seletor-id -> ID
+
+O ID possui maior especificidade.*/
+
+p {
+    color: black;
+}
+
+.ordem-seletor {
+    color: blue;
+}
+
+#ordem-seletor-id {
+    color: red;
+}
+
+
+/* 8. CORES — NOME
+/*
+Podemos usar o nome da cor. */
+
+.cor-nome {
+    color: white;
+    background-color: tomato;
+}
+
+
+/* 9. CORES — HEXADECIMAL
+/*
+HEX representa RGB usando hexadecimal.
+
+#RRGGBB
+
+RR = vermelho
+GG = verde
+BB = azul
+*/
+.cor-hex {
+    color: white;
+    background-color: #2563eb;
+}
+
+
+/* 10. CORES — RGB
+/*
+RGB: rgb(red, green, blue)
+
+Cada valor normalmente vai de 0 a 255.
+*/
+.cor-rgb {
+    color: white;
+    background-color: rgb(0, 128, 0);
+}
+
+
+/* 11. CORES — RGBA
+/*
+RGBA adiciona o canal alpha.
+rgba(red, green, blue, alpha)
+
+Alpha:
+0   = transparente
+1   = totalmente opaco
+*/
+.cor-rgba {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+
+/* 12. CORES — HSL
+/*
+HSL: hsl(hue, saturation, lightness) */
+.cor-hsl {
+    color: white;
+    background-color: hsl(220, 80%, 50%);
+}
+
+
+/* 13. BACKGROUND COLOR
+/*
+/* Define a cor de fundo do elemento. */
+
+.background-color {
+    background-color: lightblue;
+    padding: 20px;
+}
+
+
+/* 14. BACKGROUND COM OPACIDADE
+/*
+RGBA pode ser usado no background para criar transparência.
+*/
+
+.background-rgba {
+    background-color: rgba(255, 0, 0, 0.3);
+    padding: 20px;
+}
+
+
+/* 15. BACKGROUND IMAGE
+/*
+background-image coloca uma imagem no fundo.
+
+background-size: cover
+faz a imagem cobrir toda a área do elemento.
+
+background-position: center
+centraliza a imagem.
+*/
+
+.background-image {
+    width: 400px;
+    height: 200px;
+
+    background-image: url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+    padding: 20px;
+}
+
+
+/* 16. BOX MODEL — CONTENT 
+/*
+Todo elemento pode ser entendido como uma caixa.
+O conteúdo fica no centro do Box Model.
+*/
+
+.box-content {
+    background-color: lightgray;
+}
+
+
+/* 17. WIDTH
+/*
+width define a largura do elemento.
+*/
+.box-width {
+    width: 200px;
+    background-color: lightblue;
+}
+
+
+/* 18. HEIGHT
+/*
+height define a altura do elemento.*/
+.box-height {
+    height: 100px;
+    background-color: lightgreen;
+}
+
+
+/* 19. PADDING
+/*
+Padding é o espaço interno.
+Ele fica entre o conteúdo e a borda.*/
+.box-padding {
+    padding: 30px;
+    background-color: lightyellow;
+    border: 1px solid black;
+}
+
+
+/* 20. PADDING INDIVIDUAL
+/*
+Podemos definir cada lado separadamente.
+top
+right
+bottom
+left
+*/
+.padding-individual {
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+
+    background-color: #dbeafe;
+}
+
+
+/* 21. PADDING SHORTHAND
+/*
+Uma propriedade pode representar os quatro lados.
+
+padding: 10px;
+Todos os lados = 10px.
+
+padding: 10px 20px;
+top/bottom = 10px
+left/right = 20px
+
+padding: 10px 20px 30px;
+top = 10px
+left/right = 20px
+bottom = 30px
+
+padding: 10px 20px 30px 40px;
+top = 10px
+right = 20px
+bottom = 30px
+left = 40px
+*/
+.padding-shorthand {
+    padding: 10px 20px 30px 40px;
+    background-color: #dcfce7;
+}
+
+/* 22. BORDER
+/*
+border cria uma borda.
+border: tamanho estilo cor; */
+.box-border {
+    border: 3px solid black;
+    padding: 20px;
+}
+
+/* 23. BORDER INDIVIDUAL */
+.border-individual {
+    border-top: 3px solid red;
+    border-right: 3px dashed blue;
+    border-bottom: 3px dotted green;
+    border-left: 3px double purple;
+
+    padding: 20px;
+}
+
+/* 24. BORDER RADIUS 
+/*
+/* border-radius arredonda os cantos.*/
+
+.border-radius {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+
+/* 25. MARGIN
+/*
+Margin é o espaço externo.
+Fica fora da borda.
+*/
+
+.box-margin {
+    margin: 30px;
+    padding: 20px;
+    background-color: #fef3c7;
+}
+
+
+/* 26. BOX MODEL COMPLETO */
+.box-model-completo {
+
+    /* Largura do conteúdo */
+    width: 200px;
+
+    /* Altura do conteúdo */
+    height: 100px;
+
+    /* Espaço interno */
+    padding: 20px;
+
+    /* Borda */
+    border: 5px solid black;
+
+    /* Espaço externo */
+    margin: 30px;
+
+    background-color: lightblue;
+}
+
+
+/* 27. BOX-SIZING: CONTENT-BOX
+/*
+content-box é o comportamento padrão.
+width e height representam somente o conteúdo.
+Padding e border são adicionados ao tamanho final.
+*/
+
+.content-box {
+    box-sizing: content-box;
+
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+
+    background-color: #fee2e2;
+}
+
+
+/* 28. BOX-SIZING: BORDER-BOX
+/*
+border-box faz width e height incluírem:
+content + padding + border
+*/
+
+.border-box {
+    box-sizing: border-box;
+
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+
+    background-color: #dcfce7;
+}
+
+
+/* 29. ALINHAMENTO DE TEXTO
+/*
+text-align controla o alinhamento horizontal do texto.
+
+Valores comuns:
+left
+center
+right
+justify
+*/
+
+.text-align {
+    text-align: center;
+}
+
+
+/* 30. DECORAÇÃO DE TEXTO
+/*
+text-decoration pode adicionar:
+
+underline
+overline
+line-through
+none
+*/
+
+.text-decoration {
+    text-decoration: underline;
+}
+
+
+/* 31. TEXT TRANSFORM
+/*
+text-transform altera a capitalização visual.
+
+uppercase
+lowercase
+capitalize
+*/
+
+.text-transform {
+    text-transform: uppercase;
+}
+
+
+/* 32. LETTER SPACING
+/*
+Controla o espaço entre as letras.
+*/
+
+.letter-spacing {
+    letter-spacing: 5px;
+}
+
+
+/* 33. FONT FAMILY
+/*
+Define a família da fonte.
+É possível informar fontes alternativas.
+*/
+
+.font-family {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* 34. FONT STYLE
+/*
+font-style define o estilo.
+
+normal
+italic
+oblique
+*/
+
+.font-style {
+    font-style: italic;
+}
+
+
+/* 35. FONT WEIGHT
+/*
+font-weight controla o peso da fonte.
+400 = normal
+700 = negrito
+*/
+
+.font-weight {
+    font-weight: 700;
+}
+
+
+/* 36. FONT SIZE
+/*
+font-size define o tamanho da fonte.
+*/
+
+.font-size {
+    font-size: 20px;
+}
+
+
+/* 37. DISPLAY: BLOCK
+/*
+Block:
+- começa em uma nova linha;
+- normalmente ocupa toda a largura disponível;
+- aceita width e height.
+*/
+
+.display-block {
+    display: block;
+
+    width: 300px;
+    padding: 10px;
+
+    background-color: #bfdbfe;
+    border: 1px solid blue;
+}
+
+
+/* 38. DISPLAY: INLINE
+/*
+Inline:
+- permanece na mesma linha;
+- ocupa somente o espaço necessário;
+- width e height não funcionam da mesma maneira que em block.
+*/
+
+.display-inline {
+    display: inline;
+
+    background-color: #bbf7d0;
+    border: 1px solid green;
+}
+
+
+/* 39. DISPLAY: INLINE-BLOCK
+/*
+Inline-block:
+- permanece na mesma linha;
+- permite definir width e height.
+*/
+
+.display-inline-block {
+    display: inline-block;
+
+    width: 150px;
+    height: 60px;
+
+    padding: 10px;
+
+    background-color: #fde68a;
+    border: 1px solid orange;
+}
+
+
+/* 40. DISPLAY: FLEX
+/*
+display: flex transforma o elemento em um flex container.
+Os filhos passam a ser flex items.
+*/
+
+.display-flex {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    background-color: #ddd6fe;
+}
+
+.display-flex div {
+    padding: 20px;
+    background-color: purple;
+    color: white;
+}
+
+
+/* 41. DISPLAY: GRID
+/*
+display: grid cria um grid.
+grid-template-columns define as colunas.
+*/
+
+.display-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.display-grid div {
+    padding: 20px;
+    background-color: #bfdbfe;
+}
+
+
+/* 42. DISPLAY: NONE
+/*
+display: none:
+- esconde o elemento;
+- remove o elemento do layout;
+- ele não ocupa espaço.
+*/
+
+.display-none {
+    display: none;
+}
+
+
+/* 43. POSITION: STATIC
+/*
+static é o valor padrão.
+O elemento segue o fluxo normal.
+top, right, bottom e left não deslocam um elemento static.
+*/
+
+.position-static {
+    position: static;
+
+    background-color: #e2e8f0;
+    padding: 20px;
+}
+
+
+/* 44. POSITION: RELATIVE
+/*
+relative:
+- mantém o espaço original;
+- permite usar top, right, bottom e left;
+- pode servir de referência para um filho absolute.
+*/
+
+.position-relative {
+    position: relative;
+
+    /* Move visualmente 20px para baixo */
+    top: 20px;
+
+    /* Move visualmente 20px para a direita */
+    left: 20px;
+
+    width: 200px;
+    padding: 20px;
+
+    background-color: #bfdbfe;
+    border: 2px solid blue;
+}
+
+
+/* 45. POSITION: ABSOLUTE
+/*
+absolute:
+- sai do fluxo normal;
+- pode ser posicionado com top/right/bottom/left;
+- procura um ancestral posicionado como referência.
+*/
+
+.pai-relative {
+    position: relative;
+
+    width: 400px;
+    height: 200px;
+
+    margin-top: 50px;
+
+    background-color: #dcfce7;
+    border: 2px solid green;
+}
+
+.filho-absolute {
+    position: absolute;
+
+    /*
+    Como o pai é relative,
+    estas posições são calculadas em relação ao pai.
+    */
+
+    top: 20px;
+    right: 20px;
+
+    padding: 15px;
+
+    background-color: green;
+    color: white;
+}
+
+
+/* 46. RELATIVE + ABSOLUTE
+/*
+Esse padrão é muito usado.
+
+Pai:
+position: relative;
+
+Filho:
+position: absolute;
+
+Assim podemos posicionar o filho dentro do pai.
+*/
+
+.card-relative {
+    position: relative;
+
+    width: 400px;
+
+    margin-top: 30px;
+    padding: 30px;
+
+    border: 2px solid #94a3b8;
+    border-radius: 10px;
+}
+
+.badge-absolute {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    padding: 5px 10px;
+
+    background-color: red;
+    color: white;
+
+    border-radius: 10px;
+}
+
+
+/* 47. POSITION: FIXED
+/*
+fixed:
+- é posicionado em relação à viewport;
+- não acompanha o fluxo normal;
+- permanece na mesma posição durante o scroll.
+*/
+
+.position-fixed {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    padding: 15px;
+
+    background-color: black;
+    color: white;
+
+    z-index: 100;
+}
+
+
+/* 48. POSITION: STICKY
+/*
+sticky começa participando do fluxo.
+
+Quando chega ao limite definido por top,
+ele fica "grudado" durante o scroll dentro do seu contexto.
+*/
+
+.sticky-container {
+    height: 250px;
+
+    overflow-y: auto;
+
+    border: 2px solid #94a3b8;
+}
+
+.position-sticky {
+    position: sticky;
+
+    top: 0;
+
+    padding: 15px;
+
+    background-color: darkblue;
+    color: white;
+}
+
+
+/* 49. Z-INDEX
+/*
+z-index controla a ordem de empilhamento.
+
+Quanto maior o valor, mais acima o elemento fica
+dentro do mesmo contexto de empilhamento.
+
+Para visualizar o z-index, os elementos precisam estar
+posicionados.
+*/
+
+.z-index-container {
+    position: relative;
+
+    height: 250px;
+
+    margin-top: 30px;
+
+    border: 2px solid black;
+}
+
+.z-index-1 {
+    position: absolute;
+
+    top: 30px;
+    left: 50px;
+
+    width: 150px;
+    height: 150px;
+
+    z-index: 1;
+
+    background-color: blue;
+    color: white;
+}
+
+.z-index-2 {
+    position: absolute;
+
+    top: 60px;
+    left: 100px;
+
+    width: 150px;
+    height: 150px;
+
+    z-index: 2;
+
+    background-color: green;
+    color: white;
+}
+
+.z-index-3 {
+    position: absolute;
+
+    top: 90px;
+    left: 150px;
+
+    width: 150px;
+    height: 150px;
+
+    z-index: 3;
+
+    background-color: red;
+    color: white;
+}
+
+
+/* ESPAÇO FINAL
+/*
+Somente para permitir testar position: fixed/sticky
+com uma página maior.*/
+.espaco-final {
+    height: 600px;
+}
