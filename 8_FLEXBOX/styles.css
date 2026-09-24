@@ -1,0 +1,1023 @@
+/* ============================================================
+   FLEXBOX — MATERIAL DE ESTUDO
+   ============================================================
+
+   Flexbox é um modelo de layout do CSS usado para organizar
+   elementos dentro de um container.
+
+   Para ativar o Flexbox:
+
+       display: flex;
+
+   O elemento que recebe "display: flex" passa a ser chamado
+   de FLEX CONTAINER.
+
+   Os elementos que estão dentro dele são os FLEX ITEMS.
+
+   Exemplo:
+
+       .container {
+           display: flex;
+       }
+
+       <div class="container">
+           <div>Item 1</div>
+           <div>Item 2</div>
+       </div>
+
+   IMPORTANTE:
+   Algumas propriedades são aplicadas no CONTAINER e outras
+   nos ITEMS.
+
+   Propriedades do container:
+   - flex-direction
+   - flex-wrap
+   - justify-content
+   - align-items
+   - gap
+
+   Propriedades dos itens:
+   - order
+   - flex-grow
+   - flex-shrink
+   - flex-basis
+   - flex
+   - align-self
+*/
+
+
+/* ============================================================
+   CONFIGURAÇÃO GERAL
+   ============================================================ */
+
+body {
+    /*
+        Apenas adiciona espaço na parte inferior da página.
+
+        Isso não tem relação com Flexbox.
+
+        Foi colocado para facilitar os testes no navegador,
+        principalmente quando o conteúdo da página fica grande.
+    */
+    padding-bottom: 500px;
+}
+
+
+/* ============================================================
+   1 — DISPLAY: FLEX
+   ============================================================ */
+
+/*
+    display: flex;
+
+    TRANSFORMA o elemento em um FLEX CONTAINER.
+
+    Os elementos filhos passam a ser FLEX ITEMS.
+
+    Por padrão:
+
+        flex-direction: row;
+
+    Ou seja, os elementos são organizados horizontalmente,
+    da esquerda para a direita.
+
+    Antes do Flexbox:
+
+        Item 1
+        Item 2
+        Item 3
+
+    Com display: flex:
+
+        Item 1   Item 2   Item 3
+*/
+
+.flex {
+    display: flex;
+
+    background-color: bisque;
+
+    margin-bottom: 15px;
+}
+
+
+/* ============================================================
+   2 — FLEX-DIRECTION
+   ============================================================ */
+
+/*
+    flex-direction define a DIREÇÃO do eixo principal.
+
+    Valores principais:
+
+        row
+        column
+        row-reverse
+        column-reverse
+
+
+    row — padrão:
+
+        1 → 2 → 3
+
+
+    column:
+
+        1
+        ↓
+        2
+        ↓
+        3
+
+
+    IMPORTANTE:
+
+    Quando usamos:
+
+        flex-direction: row;
+
+    o eixo principal é HORIZONTAL.
+
+    Quando usamos:
+
+        flex-direction: column;
+
+    o eixo principal passa a ser VERTICAL.
+
+
+    Isso é muito importante porque propriedades como
+    justify-content e align-items dependem desses eixos.
+*/
+
+.flex-column {
+    display: flex;
+
+    /*
+        Os elementos deixam de ficar lado a lado
+        e passam a ficar um abaixo do outro.
+    */
+    flex-direction: column;
+}
+
+
+/* ============================================================
+   3 — FLEX-WRAP
+   ============================================================ */
+
+/*
+    Por padrão, o Flexbox tenta manter todos os itens
+    na mesma linha.
+
+        flex-wrap: nowrap;
+
+    Quando usamos:
+
+        flex-wrap: wrap;
+
+    os itens podem "quebrar" para uma nova linha quando
+    não houver espaço suficiente.
+
+    Exemplo:
+
+    Sem wrap:
+
+    [1] [2] [3] [4] [5] ...
+
+    Com wrap:
+
+    [1] [2] [3]
+    [4] [5] [6]
+    [7] [8] [9]
+
+    É muito útil para layouts responsivos.
+*/
+
+.flex-wrap {
+    display: flex;
+
+    /*
+        Permite que os itens passem para a próxima linha.
+    */
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+
+/*
+    Cada box ocupa aproximadamente 33% da largura
+    do container.
+
+    Como existem vários elementos, depois que não houver
+    espaço para outro item, o Flexbox cria uma nova linha.
+
+    ATENÇÃO:
+
+    "width: 33%" é a largura do item.
+
+    Não é o Flexbox que está dizendo que existem
+    três colunas. É o width dos próprios elementos.
+*/
+
+.box {
+    height: 40px;
+
+    width: 33%;
+
+    border: 1px solid red;
+}
+
+
+/* ============================================================
+   4 — JUSTIFY-CONTENT
+   ============================================================ */
+
+/*
+    justify-content controla o alinhamento dos itens
+    no EIXO PRINCIPAL.
+
+    O eixo principal depende do flex-direction.
+
+    Se:
+
+        flex-direction: row;
+
+    o eixo principal é horizontal.
+
+    Se:
+
+        flex-direction: column;
+
+    o eixo principal é vertical.
+
+
+    Alguns valores importantes:
+
+        flex-start
+        center
+        flex-end
+        space-between
+        space-around
+        space-evenly
+*/
+
+
+/*
+    Aqui diminuímos a largura dos boxes para que seja
+    mais fácil visualizar o espaço disponível no container.
+*/
+
+.center .box,
+.around .box,
+.between .box,
+.end .box {
+    width: 50px;
+}
+
+
+/*
+    -------------------------
+    JUSTIFY-CONTENT: CENTER
+    -------------------------
+
+    Coloca os itens no centro do eixo principal.
+
+        |      [1][2][3]      |
+
+    O espaço livre é distribuído igualmente antes e depois
+    do conjunto de elementos.
+*/
+
+.center {
+    display: flex;
+
+    margin-bottom: 25px;
+
+    justify-content: center;
+}
+
+
+/*
+    -------------------------
+    SPACE-AROUND
+    -------------------------
+
+    Distribui espaço AO REDOR dos itens.
+
+        |  [1]   [2]   [3]  |
+
+    Existe espaço antes, entre e depois dos elementos.
+
+    O espaço entre dois itens acaba sendo maior que o espaço
+    existente nas extremidades, porque cada item recebe
+    espaço dos dois lados.
+*/
+
+.around {
+    display: flex;
+
+    margin-bottom: 25px;
+
+    justify-content: space-around;
+}
+
+
+/*
+    -------------------------
+    SPACE-BETWEEN
+    -------------------------
+
+    Coloca o primeiro item no início e o último no final.
+
+        [1]          [2]          [3]
+
+    Não existe espaço extra nas extremidades.
+
+    Todo o espaço disponível é distribuído ENTRE os itens.
+*/
+
+.between {
+    display: flex;
+
+    margin-bottom: 25px;
+
+    justify-content: space-between;
+}
+
+
+/*
+    -------------------------
+    FLEX-END
+    -------------------------
+
+    Coloca os elementos no final do eixo principal.
+
+        |             [1][2][3] |
+
+    Em um row, isso significa lado direito.
+*/
+
+.end {
+    display: flex;
+
+    margin-bottom: 25px;
+
+    justify-content: flex-end;
+}
+
+
+/* ============================================================
+   5 — ALIGN-ITEMS
+   ============================================================ */
+
+/*
+    align-items controla o alinhamento dos itens
+    no EIXO TRANSVERSAL (cross axis).
+
+    Pense assim:
+
+        justify-content → eixo principal
+        align-items     → eixo transversal
+
+
+    Com:
+
+        flex-direction: row;
+
+    temos:
+
+        eixo principal  → horizontal
+        eixo transversal ↓ vertical
+
+
+    Portanto:
+
+        justify-content: center;
+
+    centraliza horizontalmente.
+
+    Enquanto:
+
+        align-items: center;
+
+    centraliza verticalmente.
+*/
+
+
+/*
+    Criamos uma altura de 200px para deixar o espaço
+    vertical visível.
+
+    Sem espaço sobrando, fica difícil perceber
+    o efeito do align-items.
+*/
+
+.strech,
+.align-center,
+.flex-end {
+    display: flex;
+
+    margin-bottom: 20px;
+
+    height: 200px;
+
+    border: 1px solid blue;
+}
+
+
+/*
+    Os boxes possuem largura fixa para facilitar
+    a visualização do alinhamento.
+*/
+
+.strech .box,
+.align-center .box,
+.flex-end .box {
+    width: 50px;
+}
+
+
+/*
+    -------------------------
+    ALIGN-ITEMS: CENTER
+    -------------------------
+
+    Centraliza os itens no eixo transversal.
+
+    Como estamos usando row:
+
+        eixo principal → horizontal
+        eixo transversal → vertical
+
+    Portanto, os boxes ficam verticalmente centralizados.
+*/
+
+.align-center {
+    align-items: center;
+}
+
+
+/*
+    -------------------------
+    ALIGN-ITEMS: FLEX-END
+    -------------------------
+
+    Coloca os itens no final do eixo transversal.
+
+    Com row, significa colocar os itens na parte inferior.
+*/
+
+.flex-end {
+    align-items: flex-end;
+}
+
+
+/*
+    -------------------------
+    ALIGN-ITEMS: STRETCH
+    -------------------------
+
+    É o valor padrão do align-items.
+
+    Quando os itens não possuem uma altura definida,
+    eles podem se esticar para ocupar o espaço disponível
+    no eixo transversal.
+
+    Aqui:
+
+        height: auto;
+
+    permite que o stretch tenha efeito.
+*/
+
+.strech .box {
+    height: auto;
+}
+
+.strech {
+    /*
+        Os itens são esticados verticalmente para ocupar
+        a altura disponível do container.
+    */
+    align-items: stretch;
+}
+
+
+/* ============================================================
+   6 — GAP
+   ============================================================ */
+
+/*
+    gap define o espaço ENTRE os elementos do Flexbox.
+
+    É uma maneira muito prática de criar espaçamento
+    sem precisar colocar margin individual em cada item.
+
+    Exemplo:
+
+        gap: 10px;
+
+        [1] 10px [2] 10px [3]
+
+    Também funciona quando existe mais de uma linha.
+*/
+
+.gap {
+    display: flex;
+
+    /*
+        Permite que os elementos quebrem para novas linhas.
+    */
+    flex-wrap: wrap;
+
+    /*
+        Centraliza os elementos no eixo principal.
+    */
+    justify-content: center;
+
+    /*
+        Cria 10px de espaço entre os itens.
+    */
+    gap: 10px;
+
+    border: 1px solid green;
+}
+
+
+.gap .box {
+    width: 32%;
+}
+
+
+/* ============================================================
+   7 — ORDER
+   ============================================================ */
+
+/*
+    order permite alterar a ordem VISUAL dos elementos.
+
+    IMPORTANTE:
+
+    Ele não altera o HTML.
+
+    O HTML continua:
+
+        3
+        1
+        2
+
+    Mas o CSS pode mudar a ordem visual.
+
+    Quanto MENOR o valor de order,
+    mais cedo o elemento aparece.
+
+    O valor padrão é:
+
+        order: 0;
+*/
+
+.order {
+    display: flex;
+}
+
+
+/*
+    O elemento que possui order: 1
+    será colocado antes dos elementos
+    que possuem order: 2 e order: 3.
+*/
+
+#one {
+    order: 1;
+}
+
+#two {
+    order: 2;
+}
+
+#three {
+    order: 3;
+}
+
+
+/* ============================================================
+   8 — FLEX-GROW
+   ============================================================ */
+
+/*
+    flex-grow determina quanto um item pode CRESCER
+    para ocupar espaço livre no container.
+
+    Valor padrão:
+
+        flex-grow: 0;
+
+    Ou seja, por padrão o item não cresce para ocupar
+    o espaço restante.
+
+    Se:
+
+        flex: 1;
+
+    estamos, entre outras coisas, definindo:
+
+        flex-grow: 1;
+*/
+
+
+.grow {
+    display: flex;
+}
+
+
+/*
+    Todos os boxes possuem grow = 1.
+
+    Isso significa que eles participam igualmente
+    da distribuição do espaço disponível.
+*/
+
+.grow .box {
+    flex: 1;
+}
+
+
+/*
+    Este elemento possui:
+
+        flex-grow: 2
+
+    Portanto, ele recebe uma quantidade de espaço
+    proporcionalmente maior.
+
+    Pense em uma divisão:
+
+        item 1 → 1 parte
+        item 2 → 2 partes
+        item 3 → 1 parte
+*/
+
+.grow .big {
+    flex: 2;
+}
+
+
+/* ============================================================
+   9 — FLEX-BASIS
+   ============================================================ */
+
+/*
+    flex-basis define o TAMANHO INICIAL do item
+    antes que o Flexbox distribua o espaço restante.
+
+    É parecido com width quando estamos trabalhando
+    com flex-direction: row.
+
+    Exemplo:
+
+        flex-basis: 20px;
+
+    significa que o tamanho inicial será 20px
+    no eixo principal.
+
+
+    IMPORTANTE:
+
+    flex-basis trabalha no EIXO PRINCIPAL.
+
+    row    → largura inicial
+    column → altura inicial
+*/
+
+
+.basis {
+    display: flex;
+}
+
+
+/*
+    Todos começam com uma base de 20px.
+*/
+
+.basis .box {
+    flex-basis: 20px;
+}
+
+
+/*
+    O item .big pode crescer para ocupar
+    o espaço restante.
+
+    Aqui estamos usando:
+
+        flex-grow: 1;
+*/
+
+.basis .big {
+    flex-grow: 1;
+}
+
+
+/* ============================================================
+   10 — FLEX-SHRINK
+   ============================================================ */
+
+/*
+    flex-shrink controla quanto um item pode DIMINUIR
+    quando não existe espaço suficiente no container.
+
+    Valor padrão:
+
+        flex-shrink: 1;
+
+    Isso significa que o item pode encolher.
+
+
+    Imagine:
+
+        Container = 500px
+
+        Item 1 = 250px
+        Item 2 = 250px
+        Item 3 = 250px
+
+    Temos:
+
+        750px de itens
+        500px de espaço
+
+    Falta espaço.
+
+    O Flexbox precisa reduzir os itens.
+
+    É nesse momento que flex-shrink entra em ação.
+*/
+
+
+.shrink {
+    display: flex;
+}
+
+
+.shrink .box {
+    /*
+        Permite que o item cresça.
+    */
+    flex-grow: 1;
+
+    /*
+        Permite que o item diminua caso
+        não exista espaço suficiente.
+    */
+    flex-shrink: 1;
+
+    /*
+        Tamanho inicial do item.
+    */
+    flex-basis: 250px;
+
+    /*
+        Evita que width interfira no exemplo.
+    */
+    width: auto;
+}
+
+
+/*
+    Este item possui:
+
+        flex-shrink: 2;
+
+    Portanto, ele possui uma participação maior
+    na redução quando faltar espaço.
+*/
+
+.shrink .small {
+    flex-shrink: 2;
+}
+
+
+/* ============================================================
+   11 — FLEX: SHORTHAND
+   ============================================================ */
+
+/*
+    A propriedade:
+
+        flex:
+
+    é um shorthand para:
+
+        flex-grow
+        flex-shrink
+        flex-basis
+
+
+    Portanto:
+
+        flex: 1 1 50px;
+
+    significa:
+
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 50px;
+
+
+    Ordem:
+
+        flex: grow shrink basis;
+*/
+
+
+.shorthand {
+    display: flex;
+}
+
+
+.shorthand .box {
+    width: auto;
+
+    /*
+        grow  = 1
+        shrink = 1
+        basis = 50px
+    */
+    flex: 1 1 50px;
+}
+
+
+/*
+    Aqui:
+
+        grow = 3
+        shrink = 1
+        basis = 400px
+
+    Portanto, este item começa com uma base maior
+    e também possui maior capacidade de crescimento.
+*/
+
+.shorthand .different {
+    flex: 3 1 400px;
+}
+
+
+/* ============================================================
+   12 — ALIGN-SELF
+   ============================================================ */
+
+/*
+    align-self permite alterar o alinhamento de UM ÚNICO ITEM.
+
+    É diferente de:
+
+        align-items
+
+    porque:
+
+        align-items → controla TODOS os itens.
+
+        align-self → controla UM item específico.
+
+
+    Exemplo:
+
+        container:
+            align-items: flex-end;
+
+
+        item específico:
+            align-self: center;
+
+
+    Resultado:
+
+        todos os itens ficam embaixo,
+        mas um item específico fica no centro.
+*/
+
+
+.auto-alignment {
+    height: 300px;
+
+    display: flex;
+
+    /*
+        Todos os itens serão colocados
+        no final do eixo transversal.
+    */
+    align-items: flex-end;
+
+    border: 1px solid purple;
+}
+
+
+/*
+    Este item ignora o align-items do container
+    e define seu próprio alinhamento.
+
+    Portanto, somente ele ficará centralizado.
+*/
+
+.auto-alignment .different {
+    align-self: center;
+}
+
+
+/* ============================================================
+   RESUMO — COMO PENSAR NO FLEXBOX
+   ============================================================
+
+    Quando encontrar:
+
+        display: flex;
+
+    faça estas perguntas:
+
+    1. Qual é a direção?
+
+        flex-direction
+
+    2. Qual é o eixo principal?
+
+        row    → horizontal
+        column → vertical
+
+    3. Como os itens são distribuídos no eixo principal?
+
+        justify-content
+
+    4. Como os itens são alinhados no eixo transversal?
+
+        align-items
+
+    5. Preciso permitir quebra de linha?
+
+        flex-wrap
+
+    6. Quero espaço entre os itens?
+
+        gap
+
+    7. Quero alterar um item individualmente?
+
+        order
+        align-self
+
+    8. Quero controlar crescimento?
+
+        flex-grow
+
+    9. Quero controlar redução?
+
+        flex-shrink
+
+    10. Quero definir o tamanho inicial?
+
+        flex-basis
+
+    11. Quero escrever grow + shrink + basis juntos?
+
+        flex
+
+
+   ============================================================
+   MAPA MENTAL
+   ============================================================
+
+              FLEX CONTAINER
+                    |
+             display: flex
+                    |
+          +---------+---------+
+          |                   |
+    EIXO PRINCIPAL       EIXO TRANSVERSAL
+          |                   |
+          |                   |
+    justify-content       align-items
+                              |
+                          align-self
+          |
+    flex-direction
+          |
+     +----+----+
+     |         |
+    row      column
+
+
+   ============================================================
+   DICA PARA FIXAR
+   ============================================================
+
+   Pense sempre:
+
+       JUSTIFY = distribuição
+       ALIGN   = alinhamento
+
+   E depois pergunte:
+
+       "Em qual eixo?"
+
+   O flex-direction é o que muda a orientação dos eixos.
+*/
